@@ -28,4 +28,8 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private StatutReservation statut;
+    @OneToOne(mappedBy = "reservation")
+    Contrat contrat ;
+    @ManyToOne
+    Client client ;
 }
