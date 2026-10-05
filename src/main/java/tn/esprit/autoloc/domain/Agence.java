@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -32,8 +33,9 @@ public class Agence {
 
     @Column(nullable = false, length = 20)
     private String telephone;
+    @OneToMany(mappedBy = "agence", cascade = CascadeType.ALL)
+    private List<Employe> employes = new ArrayList<>();
+
     @OneToMany(mappedBy = "agence")
-    private Set<Vehicule> vehicule ;
-    @OneToMany(mappedBy = "agence")
-     List<Employe> employes ;
+    private List<Vehicule> vehicules = new ArrayList<>();
 }

@@ -30,6 +30,7 @@ public class Paiement {
     @Column(nullable = false, length = 20)
     private ModePaiement modePaiement;
 
-    @ManyToOne()
-    Contrat contrat;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "contrat_id")
+    private Contrat contrat;
 }

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,10 +32,14 @@ public class Contrat {
     @Column(nullable = false)
     private boolean valide;
 
-    @OneToOne
-    Reservation reservation ;
-    @OneToMany(mappedBy="contrat")
-    Set<Paiement> paiement ;
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "reservation_id", unique = true)
+    private Reservation reservation;
+
+    // Composition : les paiements vivent et meurent avec le contrat
+    @OneToMany(mappedBy = "contrat", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Paiement> paiements = new ArrayList<>();
+
 
 
 }
