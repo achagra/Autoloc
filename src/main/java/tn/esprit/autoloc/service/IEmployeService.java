@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public interface IEmployeService {
     List<Employe> retrieveAllEmployes();
-    Employe addEmploye(Employe c);
-    Employe updateClient(Client c);
+    Employe addEmploye(Employe e);
+    Employe updateEmploye(Employe e);
     Optional<Employe> retrieveEmploye ( Long idEmploye);
     void removeEmploye(Long idEmploye);
     List<Employe> addEmployes (List<Employe> Employes);
