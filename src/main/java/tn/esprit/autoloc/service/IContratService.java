@@ -12,5 +12,6 @@ public interface IContratService {
     Contrat updateContrat(Contrat C);
     Optional<Contrat> retrieveContrat(Long idContrat);
     void removeContrat(Long idContrat);
-    List<Contrat> addContrat (List<Contrat> contrats);
+
+    List<Contrat> addContrats(List<Contrat> contrats);
 }

@@ -1,15 +1,16 @@
 package tn.esprit.autoloc.service;
 
-import tn.esprit.autoloc.domain.Client;
+
+import tn.esprit.autoloc.domain.Equipement;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IEquipementService {
-    List<Client> retrieveAllClients();
-    Client addClient(Client c);
-    Client updateClient(Client c);
-    Optional<Client> retrieveClient(Long idClient);
-    void removeClient(Long idClient);
-    List<Client> addClients (List<Client> clients);
+    List<Equipement> retrieveAllEquipements();
+    Equipement addEquipement(Equipement e);
+    Equipement updateEquipement(Equipement e);
+    Optional<Equipement > retrieveEquipement (Long idEquipement );
+    void removeEquipement (Long idEquipement );
+    List<Equipement> addEquipements (List<Equipement > Equipements);
 }

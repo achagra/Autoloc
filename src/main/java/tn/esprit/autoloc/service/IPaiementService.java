@@ -1,15 +1,16 @@
 package tn.esprit.autoloc.service;
 
-import tn.esprit.autoloc.domain.Client;
+
+import tn.esprit.autoloc.domain.Paiement;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IPaiementService {
-    List<Client> retrieveAllClients();
-    Client addClient(Client c);
-    Client updateClient(Client c);
-    Optional<Client> retrieveClient(Long idClient);
-    void removeClient(Long idClient);
-    List<Client> addClients (List<Client> clients);
+    List<Paiement> retrieveAllPaiements();
+    Paiement addPaiement(Paiement p);
+    Paiement updatePaiement(Paiement p);
+    Optional<Paiement> retrievePaiement(Long idPaiement);
+    void removePaiement(Long idPaiement);
+    List<Paiement> addPaiements (List<Paiement> paiement);
 }

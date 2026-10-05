@@ -1,15 +1,16 @@
 package tn.esprit.autoloc.service;
 
-import tn.esprit.autoloc.domain.Client;
+
+import tn.esprit.autoloc.domain.Maintenance;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IMaintenanceService {
-    List<Client> retrieveAllClients();
-    Client addClient(Client c);
-    Client updateClient(Client c);
-    Optional<Client> retrieveClient(Long idClient);
-    void removeClient(Long idClient);
-    List<Client> addClients (List<Client> clients);
+    List<Maintenance> retrieveAllMaintenances();
+    Maintenance addClient(Maintenance m);
+    Maintenance updateClient(Maintenance m);
+    Optional<Maintenance> retrieveMaintenance(Long idCMaintenance);
+    void removeMaintenance(Long idMaintenance);
+    List<Maintenance> addMaintenances (List<Maintenance> maintenances);
 }
