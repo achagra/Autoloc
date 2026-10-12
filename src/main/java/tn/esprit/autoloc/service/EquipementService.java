@@ -1,5 +1,7 @@
 package tn.esprit.autoloc.service;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import tn.esprit.autoloc.domain.Client;
 import tn.esprit.autoloc.domain.Equipement;
 import tn.esprit.autoloc.repository.ClientRepository;
@@ -7,9 +9,10 @@ import tn.esprit.autoloc.repository.EquipementRepository;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
+@RequiredArgsConstructor
 public class EquipementService implements IEquipementService {
-    EquipementRepository eqRepo ;
+    final EquipementRepository eqRepo ;
     @Override
     public List<Equipement> retrieveAllEquipements() {
         return (List<Equipement>) eqRepo.findAll();

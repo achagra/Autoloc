@@ -2,14 +2,17 @@ package tn.esprit.autoloc.service;
 
 
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import tn.esprit.autoloc.domain.Employe;
 import tn.esprit.autoloc.repository.EmployeRepository;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
+@RequiredArgsConstructor
 public class EmployeService implements IEmployeService {
-    EmployeRepository eRepo;
+    final EmployeRepository eRepo;
 
     @Override
     public List<Employe> retrieveAllEmployes() {

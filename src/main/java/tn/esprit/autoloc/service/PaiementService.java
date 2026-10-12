@@ -1,15 +1,18 @@
 package tn.esprit.autoloc.service;
 
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import tn.esprit.autoloc.domain.Client;
 import tn.esprit.autoloc.domain.Paiement;
 import tn.esprit.autoloc.repository.PaiementRepository;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
+@RequiredArgsConstructor
 public class PaiementService implements IPaiementService {
-    PaiementRepository paRepo ;
+    final PaiementRepository paRepo ;
     @Override
     public List<Paiement> retrieveAllPaiements() {
         return (List<Paiement>) paRepo.findAll();

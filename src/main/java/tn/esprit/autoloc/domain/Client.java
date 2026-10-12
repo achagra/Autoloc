@@ -38,7 +38,7 @@ public class Client {
     private String numPermis;
 
     @Column(nullable = false)
-    private LocalDate dateInscription;
+    private String dateInscription;
 
     @OneToMany(mappedBy = "client")
     private List<Reservation> reservations = new ArrayList<>();
