@@ -8,13 +8,13 @@ import java.util.Optional;
 public interface IAgenceService {
     List<Agence> retrieveAllAgences();
 
-
-
     Agence addAgence(Agence a);
     Agence updateAgence(Agence a);
     Optional<Agence> retrieveAgence(Long idAgence);
     void removeAgence(Long idAgence);
 
-
     List<Agence> addAgences(List<Agence> agences);
+
+
+    List<Agence> findByVille(String ville);
 }

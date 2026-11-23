@@ -3,6 +3,11 @@ package tn.esprit.autoloc.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import tn.esprit.autoloc.domain.Agence;
+
+import java.util.List;
+
 @Repository
-public interface AgenceRepository extends CrudRepository<Agence , Long> {
+public interface AgenceRepository extends CrudRepository<Agence, Long> {
+    // Q4
+    List<Agence> findByVille(String ville);
 }

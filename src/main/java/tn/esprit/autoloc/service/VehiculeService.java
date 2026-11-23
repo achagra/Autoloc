@@ -4,13 +4,12 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tn.esprit.autoloc.domain.Agence;
-import tn.esprit.autoloc.domain.Equipement;
-import tn.esprit.autoloc.domain.Vehicule;
+import tn.esprit.autoloc.domain.*;
 import tn.esprit.autoloc.repository.AgenceRepository;
 import tn.esprit.autoloc.repository.EquipementRepository;
 import tn.esprit.autoloc.repository.VehiculeRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,5 +84,35 @@ public class VehiculeService implements IVehiculeService {
                 .orElseThrow(() -> new EntityNotFoundException("Équipement introuvable : " + idEquipement));
         v.getEquipements().remove(eq);
         return veRepo.save(v);
+    }
+
+    @Override
+    public List<Vehicule> findByMarque(String marque) {
+        return veRepo.findByMarque(marque);
+    }
+
+    @Override
+    public List<Vehicule> findByCategorie(CategorieVehicule categorie) {
+        return veRepo.findByCategorie(categorie);
+    }
+
+    @Override
+    public List<Vehicule> findDisponibles() {
+        return veRepo.findByStatut(StatutVehicule.DISPONIBLE);
+    }
+
+    @Override
+    public List<Vehicule> findByMarqueContaining(String marque) {
+        return veRepo.findByMarqueContainingIgnoreCase(marque);
+    }
+
+    @Override
+    public List<Vehicule> findByTarifSuperieurA(BigDecimal tarif) {
+        return veRepo.findByTarifJournalierGreaterThan(tarif);
+    }
+
+    @Override
+    public List<Vehicule> findByMarqueDisponibles(String marque) {
+        return veRepo.findByMarqueAndStatut(marque, StatutVehicule.DISPONIBLE);
     }
 }

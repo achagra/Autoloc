@@ -38,4 +38,9 @@ public class AgenceController {
     public Agence updateAgence(@RequestBody Agence a){
         return agenceService.updateAgence(a);
     }
+
+    @GetMapping("/ville/{ville}")                         // Q4
+    public List<Agence> getByVille(@PathVariable String ville) {
+        return agenceService.findByVille(ville);
+    }
 }

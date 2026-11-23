@@ -46,4 +46,11 @@ public class AgenceService implements IAgenceService {
         return (List<Agence>) agRepo.saveAll(agences);
     }
 
+    @Override
+    public List<Agence> findByVille(String ville) {
+        return null;
+    }
+
+
+
 }

@@ -6,6 +6,7 @@ import tn.esprit.autoloc.domain.Client;
 import tn.esprit.autoloc.domain.Reservation;
 import tn.esprit.autoloc.repository.ReservationRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -41,5 +42,10 @@ public class ReservationService implements IReservationService {
     @Override
     public List<Reservation> addReservations(List<Reservation> reservations) {
         return (List<Reservation>) reRepo.saveAll(reservations);
+    }
+
+    @Override
+    public List<Reservation> findByDateDebutAfter(LocalDate date) {
+        return null;
     }
 }
