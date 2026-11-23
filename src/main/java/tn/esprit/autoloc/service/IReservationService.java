@@ -16,4 +16,7 @@ public interface IReservationService {
 
 
     List<Reservation> findByDateDebutAfter(LocalDate date);
+
+    List<Reservation> getReservationsByClient(Long idClient);
+    List<Object[]> countReservationsByClient();
 }

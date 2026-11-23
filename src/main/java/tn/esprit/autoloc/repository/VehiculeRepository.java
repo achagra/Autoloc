@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 import tn.esprit.autoloc.domain.CategorieVehicule;
 import tn.esprit.autoloc.domain.StatutVehicule;
 import tn.esprit.autoloc.domain.Vehicule;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 
 @Repository
 public interface VehiculeRepository extends CrudRepository<Vehicule, Long> {
@@ -29,4 +32,13 @@ public interface VehiculeRepository extends CrudRepository<Vehicule, Long> {
 
     // Q11 : And
     List<Vehicule> findByMarqueAndStatut(String marque, StatutVehicule statut);
+    // Véhicules d'une agence
+    @Query("SELECT v FROM Vehicule v WHERE v.agence.idAgence = :idAgence")
+    List<Vehicule> getVehiculesByAgence(@Param("idAgence") Long idAgence);
+
+    // Nombre de véhicules par agence
+    @Query("SELECT a.idAgence, a.nom, COUNT(v) " +
+            "FROM Vehicule v JOIN v.agence a " +
+            "GROUP BY a.idAgence, a.nom")
+    List<Object[]> countVehiculesByAgence();
 }

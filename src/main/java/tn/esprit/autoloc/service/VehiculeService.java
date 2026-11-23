@@ -115,4 +115,14 @@ public class VehiculeService implements IVehiculeService {
     public List<Vehicule> findByMarqueDisponibles(String marque) {
         return veRepo.findByMarqueAndStatut(marque, StatutVehicule.DISPONIBLE);
     }
+
+    @Override
+    public List<Vehicule> getVehiculesByAgence(Long idAgence) {
+        return veRepo.getVehiculesByAgence(idAgence);
+    }
+
+    @Override
+    public List<Object[]> countVehiculesByAgence() {
+        return veRepo.countVehiculesByAgence();
+    }
 }

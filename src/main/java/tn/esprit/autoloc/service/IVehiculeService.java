@@ -27,4 +27,7 @@ public interface IVehiculeService {
     List<Vehicule> findByMarqueContaining(String marque);
     List<Vehicule> findByTarifSuperieurA(BigDecimal tarif);
     List<Vehicule> findByMarqueDisponibles(String marque);
+
+    List<Vehicule> getVehiculesByAgence(Long idAgence);
+    List<Object[]> countVehiculesByAgence();
 }

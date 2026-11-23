@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.autoloc.domain.Reservation;
 import tn.esprit.autoloc.service.IReservationService;
 
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -45,5 +46,15 @@ public class ReservationController {
     public List<Reservation> getByDateDebutApres(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return reservationService.findByDateDebutAfter(date);
+    }
+
+    @GetMapping("/client/{idClient}")
+    public List<Reservation> getReservationsByClient(@PathVariable Long idClient) {
+        return reservationService.getReservationsByClient(idClient);
+    }
+
+    @GetMapping("/count-par-client")
+    public List<Object[]> countReservationsByClient() {
+        return reservationService.countReservationsByClient();
     }
 }

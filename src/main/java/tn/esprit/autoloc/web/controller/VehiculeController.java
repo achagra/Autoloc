@@ -70,4 +70,14 @@ public class VehiculeController {
     public List<Vehicule> getByMarqueDisponibles(@RequestParam String marque) {
         return vehiculeService.findByMarqueDisponibles(marque);
     }
+
+    @GetMapping("/agence/{idAgence}")
+    public List<Vehicule> getVehiculesByAgence(@PathVariable Long idAgence) {
+        return vehiculeService.getVehiculesByAgence(idAgence);
+    }
+
+    @GetMapping("/count-par-agence")
+    public List<Object[]> countVehiculesByAgence() {
+        return vehiculeService.countVehiculesByAgence();
+    }
 }
