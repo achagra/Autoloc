@@ -6,36 +6,46 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.autoloc.domain.Agence;
 import tn.esprit.autoloc.domain.Employe;
+import tn.esprit.autoloc.dto.EmployeDTO;
+import tn.esprit.autoloc.mapper.EmployeMapper;
 import tn.esprit.autoloc.repository.AgenceRepository;
 import tn.esprit.autoloc.repository.EmployeRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class EmployeService implements IEmployeService {
-    final EmployeRepository eRepo;
-    final AgenceRepository agRepo;
+
+    private final EmployeRepository eRepo;
+    private final AgenceRepository agRepo;
+    private final EmployeMapper mapper;
 
     @Override
-    public List<Employe> retrieveAllEmployes() {
-        return (List<Employe>) eRepo.findAll();
+    @Transactional(readOnly = true)
+    public List<EmployeDTO> retrieveAllEmployes() {
+        return mapper.toDtoList(eRepo.findAll());
     }
 
     @Override
-    public Employe addEmploye(Employe e) {
-        return eRepo.save(e);
+    @Transactional
+    public EmployeDTO addEmploye(Employe e) {
+        return mapper.toDto(eRepo.save(e));
     }
 
     @Override
-    public Employe updateEmploye(Employe e) {
-        return eRepo.save(e);
+    @Transactional
+    public EmployeDTO updateEmploye(Employe e) {
+        return mapper.toDto(eRepo.save(e));
     }
 
     @Override
-    public Optional<Employe> retrieveEmploye(Long idEmploye) {
-        return Optional.ofNullable(eRepo.findById(idEmploye).orElse(null));
+    @Transactional(readOnly = true)
+    public EmployeDTO retrieveEmploye(Long idEmploye) {
+        Employe e = eRepo.findById(idEmploye)
+                .orElseThrow(() -> new EntityNotFoundException("Employé introuvable : " + idEmploye));
+        return mapper.toDto(e);
     }
 
     @Override
@@ -44,22 +54,23 @@ public class EmployeService implements IEmployeService {
     }
 
     @Override
-    public List<Employe> addEmployes(List<Employe> employes) {
-        return (List<Employe>) eRepo.saveAll(employes);
+    @Transactional
+    public List<EmployeDTO> addEmployes(List<Employe> employes) {
+        return mapper.toDtoList(eRepo.saveAll(employes));
     }
 
     @Override
     @Transactional
-    public Employe desaffecterEmploye(Long idEmploye) {
+    public EmployeDTO desaffecterEmploye(Long idEmploye) {
         Employe e = eRepo.findById(idEmploye)
                 .orElseThrow(() -> new EntityNotFoundException("Employé introuvable : " + idEmploye));
         e.setAgence(null);
-        return eRepo.save(e);
+        return mapper.toDto(eRepo.save(e));
     }
 
     @Override
     @Transactional
-    public Employe affecterEmploye(Long idEmploye, Long idAgence) {
+    public EmployeDTO affecterEmploye(Long idEmploye, Long idAgence) {
         Employe e = eRepo.findById(idEmploye)
                 .orElseThrow(() -> new EntityNotFoundException("Employé introuvable : " + idEmploye));
         Agence a = agRepo.findById(idAgence)
@@ -69,6 +80,6 @@ public class EmployeService implements IEmployeService {
                     "L'employé appartient déjà à une agence : désaffectez-le d'abord.");
         }
         e.setAgence(a);
-        return eRepo.save(e);
+        return mapper.toDto(eRepo.save(e));
     }
 }

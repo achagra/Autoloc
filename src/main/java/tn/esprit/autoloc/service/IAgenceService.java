@@ -1,20 +1,19 @@
 package tn.esprit.autoloc.service;
 
 import tn.esprit.autoloc.domain.Agence;
+import tn.esprit.autoloc.dto.AgenceDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IAgenceService {
-    List<Agence> retrieveAllAgences();
+    List<AgenceDTO> retrieveAllAgences();
 
-    Agence addAgence(Agence a);
-    Agence updateAgence(Agence a);
-    Optional<Agence> retrieveAgence(Long idAgence);
+    AgenceDTO addAgence(Agence a);
+    AgenceDTO updateAgence(Agence a);
+    AgenceDTO retrieveAgence(Long idAgence);
     void removeAgence(Long idAgence);
 
-    List<Agence> addAgences(List<Agence> agences);
+    List<AgenceDTO> addAgences(List<Agence> agences);
 
-
-    List<Agence> findByVille(String ville);
+    List<AgenceDTO> findByVille(String ville);
 }

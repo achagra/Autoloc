@@ -1,8 +1,12 @@
 package tn.esprit.autoloc.service;
 
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.autoloc.domain.Agence;
+import tn.esprit.autoloc.dto.AgenceDTO;
+import tn.esprit.autoloc.mapper.AgenceMapper;
 import tn.esprit.autoloc.repository.AgenceRepository;
 
 
@@ -11,46 +15,50 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class AgenceService implements IAgenceService {
-     final AgenceRepository agRepo ;
+
+    private final AgenceRepository repo;
+    private final AgenceMapper mapper;
+
     @Override
-    public List<Agence> retrieveAllAgences() {
-        return (List<Agence>) agRepo.findAll();
+    @Transactional(readOnly = true)
+    public List<AgenceDTO> retrieveAllAgences() {
+        return mapper.toDtoList(repo.findAll());
     }
 
     @Override
-    public Agence addAgence(Agence a) {
-        return agRepo.save(a);
+    @Transactional
+    public AgenceDTO addAgence(Agence a) {
+        return mapper.toDto(repo.save(a));
     }
 
     @Override
-    public Agence updateAgence(Agence a) {
-
-        return agRepo.save(a);
+    @Transactional
+    public AgenceDTO updateAgence(Agence a) {
+        return mapper.toDto(repo.save(a));
     }
 
     @Override
-    public Optional<Agence> retrieveAgence(Long idAgence) {
-        return Optional.ofNullable(agRepo.findById(idAgence).orElse(null));
+    @Transactional(readOnly = true)
+    public AgenceDTO retrieveAgence(Long idAgence) {
+        Agence a = repo.findById(idAgence)
+                .orElseThrow(() -> new EntityNotFoundException("Agence introuvable : " + idAgence));
+        return mapper.toDto(a);
     }
 
     @Override
     public void removeAgence(Long idAgence) {
-        agRepo.deleteById(idAgence);
-
-    }
-
-
-
-    @Override
-    public List<Agence> addAgences(List<Agence> agences) {
-        return (List<Agence>) agRepo.saveAll(agences);
+        repo.deleteById(idAgence);
     }
 
     @Override
-    public List<Agence> findByVille(String ville) {
-        return null;
+    @Transactional
+    public List<AgenceDTO> addAgences(List<Agence> agences) {
+        return mapper.toDtoList(repo.saveAll(agences));
     }
 
-
-
+    @Override
+    @Transactional(readOnly = true)
+    public List<AgenceDTO> findByVille(String ville) {
+        return mapper.toDtoList(repo.findByVille(ville));
+    }
 }

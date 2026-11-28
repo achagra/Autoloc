@@ -3,10 +3,10 @@ package tn.esprit.autoloc.web.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.autoloc.domain.Employe;
+import tn.esprit.autoloc.dto.EmployeDTO;
 import tn.esprit.autoloc.service.IEmployeService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,17 +15,17 @@ public class EmployeController {
     private final IEmployeService employeService;
 
     @PostMapping("/addEmploye")
-    public Employe addEmploye(@RequestBody Employe e){
+    public EmployeDTO addEmploye(@RequestBody Employe e){
         return employeService.addEmploye(e);
     }
 
     @GetMapping("/getEmployes")
-    public List<Employe> getAllEmployes(){
+    public List<EmployeDTO> getAllEmployes(){
         return employeService.retrieveAllEmployes();
     }
 
     @GetMapping("/getEmployes/{ide}")
-    public Optional<Employe> getEmployeById(@PathVariable long ide){
+    public EmployeDTO getEmployeById(@PathVariable long ide){
         return employeService.retrieveEmploye(ide);
     }
 
@@ -35,7 +35,17 @@ public class EmployeController {
     }
 
     @PutMapping("/updateEmploye")
-    public Employe updateEmploye(@RequestBody Employe e){
+    public EmployeDTO updateEmploye(@RequestBody Employe e){
         return employeService.updateEmploye(e);
+    }
+
+    @PutMapping("/affecterEmploye/{ide}/{ida}")
+    public EmployeDTO affecterEmploye(@PathVariable long ide, @PathVariable long ida){
+        return employeService.affecterEmploye(ide, ida);
+    }
+
+    @PutMapping("/desaffecterEmploye/{ide}")
+    public EmployeDTO desaffecterEmploye(@PathVariable long ide){
+        return employeService.desaffecterEmploye(ide);
     }
 }
